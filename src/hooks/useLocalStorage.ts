@@ -5,7 +5,7 @@ export default function useLocalStorage<T>(key: string, initialValue: T): [T, (v
     try {
       const item = window.localStorage.getItem(key);
       return item ? (JSON.parse(item) as T) : initialValue;
-    } catch (e: any) {
+    } catch {
       return initialValue;
     }
   });
@@ -14,8 +14,8 @@ export default function useLocalStorage<T>(key: string, initialValue: T): [T, (v
     try {
       setStoredValue(value);
       window.localStorage.setItem(key, JSON.stringify(value));
-    } catch (e: any) {
-      console.error('Error setting localStorage key:', key, e);
+    } catch {
+      console.error('Error setting localStorage key:', key);
     }
   }
 
